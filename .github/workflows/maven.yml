@@ -38,7 +38,7 @@ jobs:
         run: mvn clean install
   deploy:
     needs: build
-    uses: maven-hello-world/.github/workflows/maven-cd.yml@master
+    uses: abithasrini/maven-hello-world/.github/workflows/maven-cd.yml@master
     with:
       build_id: ${{ github.event.release.tag_name }}
 
