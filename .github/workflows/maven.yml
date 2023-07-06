@@ -12,10 +12,14 @@ on:
   workflow_dispatch:
   push:
     branches: [ "master" ]
+    tags:
+      - 'v*' 
   pull_request:
     branches: [ "master" ]
-  schedule:
-    - cron: "*/10 * * * *" 
+#   schedule:
+#     - cron: "*/10 * * * *" 
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -32,6 +36,11 @@ jobs:
           cache: 'maven'
       - name: Build with Maven
         run: mvn clean install
+  deploy:
+    needs: build
+    uses: maven-hello-world/.github/workflows/maven-cd.yml@master
+    with:
+      build_id: ${{ github.event.release.tag_name }}
 
 #       - name: Create tag
 #         uses: actions/github-script@v5
