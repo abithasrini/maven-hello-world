@@ -19,7 +19,7 @@ on:
 #   schedule:
 #     - cron: "*/10 * * * *" 
   release:
-    types: [published]
+    types: [created]
 
 jobs:
   build:
