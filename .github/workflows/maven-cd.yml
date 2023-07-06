@@ -1,0 +1,23 @@
+name:  Continuous Deployment
+on:
+  workflow_dispatch:
+    inputs:
+      build_id: 
+        required: true
+        type: string
+  workflow_call:
+    inputs:
+      build_id: 
+        required: true
+        type: string
+jobs:
+  eb-deploy: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: Install EB CLI
+        run: |
+            sudo pip install awsebcli --upgrade
+      - name: Creating directory
+        run: |
+            mkdir -p /tmp/workspace/deploy/eb
+            mkdir -p /tmp/workspace/deploy/eb/.elasticbeanstalk
